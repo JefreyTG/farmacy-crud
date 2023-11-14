@@ -48,6 +48,31 @@ app.get("/productos_inventario", (req, res) => {
         }
       );
 }); 
+
+app.put("/update", (req, res) => {
+  
+    const id = req.body.id;
+    const product = req.body.product;
+    const amount = req.body.amount;
+    const price = req.body.price;
+  
+    db.query(
+      "UPDATE productos_inventario SET Product=?,Amount=?,Price=? WHERE id=?",
+      [product, amount, price, id],
+  
+      (err, result) => {
+        if (err) {
+          console.log("Error", err);
+            res.status(500).send("Error al añadir el producto");
+          } else {
+            console.log("Insert successful");
+            res.send("Inventario actualizado con exito");
+          }        
+        }
+       );
+  });
+
+
       
   
 app.listen(3001, () => {
