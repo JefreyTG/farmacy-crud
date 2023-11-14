@@ -47,7 +47,7 @@ app.get("/productos_inventario", (req, res) => {
           }        
         }
       );
-});
+}); 
       
   
 app.listen(3001, () => {
