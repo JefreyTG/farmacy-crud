@@ -36,6 +36,20 @@ console.log("Request Body: ", req.body);
      );
 });
 
+app.get("/productos_inventario", (req, res) => {
+       db.query("SELECT * FROM productos_inventario", 
+      (err, result) => {
+        if (err) {
+          console.log(err);
+            
+          } else {
+            res.send(result);
+          }        
+        }
+      );
+});
+      
+  
 app.listen(3001, () => {
   console.log("Corriendo en el puerto 3001");
 });
