@@ -14,23 +14,26 @@ const db = mysql.createConnection({
 });
 
 app.post("/create", (req, res) => {
+console.log("Request Body: ", req.body);
+
   const product = req.body.product;
   const amount = req.body.amount;
   const price = req.body.price;
 
   db.query(
-    "INSERT INTO productos_inventario(product,amount,price) VALUES (?,?,?)",
+    "INSERT INTO productos_inventario(Product, Amount, Price) VALUES (?,?,?)",
     [product, amount, price],
 
     (err, result) => {
       if (err) {
-        console.log(err);
-        res.status(500).send("Error al añador el producto");
-      } else {
-        res.send("Producto añadido con exito!");
+        console.log("Error", err);
+          res.status(500).send("Error al añadir el producto");
+        } else {
+          console.log("Insert successful");
+          res.send("Producto añadido con exito");
+        }        
       }
-    }
-  );
+     );
 });
 
 app.listen(3001, () => {
