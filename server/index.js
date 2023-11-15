@@ -15,13 +15,13 @@ const db = mysql.createConnection({
 
 app.post("/create", (req, res) => {
 console.log("Request Body: ", req.body);
-
+  const id=req.body.id;
   const product = req.body.product;
   const amount = req.body.amount;
   const price = req.body.price;
 
   db.query(
-    "INSERT INTO productos_inventario(Product, Amount, Price) VALUES (?,?,?)",
+    "INSERT INTO productos_inventario (Product, Amount, Price) VALUES (?,?,?)",
     [product, amount, price],
 
     (err, result) => {
@@ -50,14 +50,13 @@ app.get("/productos_inventario", (req, res) => {
 }); 
 
 app.put("/update", (req, res) => {
-  
-    const id = req.body.id;
+    const id=req.body.id;
     const product = req.body.product;
     const amount = req.body.amount;
     const price = req.body.price;
   
     db.query(
-      "UPDATE productos_inventario SET Product=?,Amount=?,Price=? WHERE id=?",
+      "UPDATE productos_inventario SET Product=?, Amount=?, Price=? WHERE id=?" ,
       [product, amount, price, id],
   
       (err, result) => {
