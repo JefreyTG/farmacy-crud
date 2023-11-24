@@ -30,7 +30,7 @@ console.log("Request Body: ", req.body);
           res.status(500).send("Error al añadir el producto");
         } else {
           console.log("Insert successful");
-          res.send("Producto añadido con exito");
+          res.send(result);
         }        
       }
      );
@@ -65,7 +65,25 @@ app.put("/update", (req, res) => {
             res.status(500).send("Error al añadir el producto");
           } else {
             console.log("Insert successful");
-            res.send("Inventario actualizado con exito");
+            res.send(result);
+          }        
+        }
+       );
+  });
+
+  app.delete("/delete/:id", (req, res) => {
+    const id=req.params.id;
+    
+    db.query(
+      "DELETE FROM productos_inventario WHERE id=?",id,
+  
+      (err, result) => {
+        if (err) {
+          console.log("Error", err);
+            res.status(500).send("Error al eliminar el producto");
+          } else {
+            console.log("Insert successful");
+            res.send(result);
           }        
         }
        );
